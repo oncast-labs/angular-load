@@ -40,20 +40,23 @@
 			this.loadScript = loader(function (src) {
 				var script = $document[0].createElement('script');
 
-				script.src      = src;
-				script.attrLoad = "lazy";
+				script.src = src;
+
+				var att = document.createAttribute('lazy');
+				att.value = "dynamicJS";
+				script.setAttributeNode(att);
 
 				$document[0].body.appendChild(script);
 				return script;
 			});
 
-			this.removeScripts = loader(function () {
-				$('body').find('[attrLoad="lazy"]').remove();
-			});
+			this.removeScripts = function () {
+				$('body').find('[lazy="dynamicJS"]').remove();
+			};
 
-			this.removeStyles = loader(function () {
-				$('head').find('[attrLoad="lazy"]').remove();
-			});
+			this.removeStyles = function () {
+				$('head').find('[lazy="dynamicCSS"]').remove();
+			};
 
 			/**
 			 * Dynamically loads the given CSS file
@@ -63,10 +66,13 @@
 			this.loadCSS = loader(function (href) {
 				var style = $document[0].createElement('link');
 
-				style.rel     = 'stylesheet';
-				style.type    = 'text/css';
-				style.href    = href;
-				style.attrLoad = "lazy";
+				style.rel  = 'stylesheet';
+				style.type = 'text/css';
+				style.href = href;
+
+				var att = document.createAttribute('lazy');
+				att.value = "dynamicCSS";
+				style.setAttributeNode(att);
 
 				$document[0].head.appendChild(style);
 				return style;
