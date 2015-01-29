@@ -4,7 +4,6 @@
   "description": "Dynamically load scripts and css stylesheets in your Angular.JS app",
   "author": "Uri Shaked",
   "license": "MIT",
-  "homepage": "http://github.com/urish/angular-load",
   "main": "./angular-load.js",
   "dependencies": {
     "angular": ">=1.0.0 <1.4.0"
@@ -14,6 +13,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/urish/angular-load.git"
+    "url": "git@github.com:oncast-labs/angular-load.git"
   }
 }

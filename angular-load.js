@@ -33,17 +33,26 @@
 			}
 
 			/**
-			 * Dynamically loads the given script
-			 * @param src The url of the script to load dynamically
-			 * @returns {*} Promise that will be resolved once the script has been loaded.
-			 */
+			* Dynamically loads the given script
+			* @param src The url of the script to load dynamically
+			* @returns {*} Promise that will be resolved once the script has been loaded.
+			*/
 			this.loadScript = loader(function (src) {
 				var script = $document[0].createElement('script');
 
-				script.src = src;
+				script.src      = src;
+				script.attrLoad = "lazy";
 
 				$document[0].body.appendChild(script);
 				return script;
+			});
+
+			this.removeScripts = loader(function () {
+				$('body').find('[attrLoad="lazy"]').remove();
+			});
+
+			this.removeStyles = loader(function () {
+				$('head').find('[attrLoad="lazy"]').remove();
 			});
 
 			/**
@@ -54,9 +63,10 @@
 			this.loadCSS = loader(function (href) {
 				var style = $document[0].createElement('link');
 
-				style.rel = 'stylesheet';
-				style.type = 'text/css';
-				style.href = href;
+				style.rel     = 'stylesheet';
+				style.type    = 'text/css';
+				style.href    = href;
+				style.attrLoad = "lazy";
 
 				$document[0].head.appendChild(style);
 				return style;
